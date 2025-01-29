@@ -1,4 +1,6 @@
-Leitor de feeds RSS agrupado por OPML
+Leitor OPML
+
+> A ideia é usar um repositório git contendo o arquivo opml e também realizar alterações quando for adicionado um novo feed
 
 # Funcionalidades
 
@@ -16,7 +18,7 @@ Para publicar imagem docker local
 dotnet publish .\src\GitRssReader.Web\ /p:PublishProfile=local
 ```
 
-A imagem `local/git-rss-reader-web` estar� dispon�vel.
+A imagem `local/git-rss-reader-web` estará disponível.
 
 # Rodando
 
