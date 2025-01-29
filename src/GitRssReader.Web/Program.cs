@@ -1,5 +1,7 @@
 ﻿using Microsoft.FluentUI.AspNetCore.Components;
 using GitRssReader.Web.Components;
+using GitRssReader.GitIntegration;
+using GitRssReader.Web.GitTasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,15 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddFluentUIComponents();
+
+builder.Services.AddOptions<GitOptions>()
+    .BindConfiguration(GitOptions.Section)
+    .ValidateDataAnnotations()
+    .ValidateOnStart()
+    ;
+
+builder.Services.AddSingleton<GitOperations>();
+builder.Services.AddHostedService<CloneRepositoryTask>();
 
 builder.Services.AddFeedsCollectionProvider();
 

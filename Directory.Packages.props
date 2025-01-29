@@ -4,11 +4,14 @@
   </PropertyGroup>
   <!-- Others -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
     <PackageVersion Include="SimpleFeedReader" Version="1.0.9" />
     <PackageVersion Include="OPMLCore.NET" Version="1.0.0" />
   </ItemGroup>
   <!-- Microsoft -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.3" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.3" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Emoji" Version="4.11.3" />

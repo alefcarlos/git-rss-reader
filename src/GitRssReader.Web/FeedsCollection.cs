@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Text;
 using OPMLCore.NET;
+using GitRssReader.GitIntegration;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -35,7 +36,7 @@ public class FeedsCollectionProvider
 {
     public FeedsCollectionProvider()
     {
-        var opml = new Opml("./opml.xml");
+        var opml = new Opml(OpmlFileProvider.Instance.FilePath);
 
         foreach (var category in opml.Body.Outlines)
         {

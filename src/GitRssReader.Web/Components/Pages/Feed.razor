@@ -16,7 +16,7 @@ else
 {
     <FluentDataGrid Items="@entries.AsQueryable()">
         <TemplateColumn Title="Título">
-            <FluentAnchor Appearance="Appearance.Hypertext" Href="@context.Uri.ToString()">@context.Title</FluentAnchor>
+            <FluentAnchor Appearance="Appearance.Hypertext" Target="_blank" Href="@context.Uri.ToString()">@context.Title</FluentAnchor>
         </TemplateColumn>
         <PropertyColumn Title="Data de publicação" Property="@(a => a.PublishDate)" Format="dd/MM/yyy" />
     </FluentDataGrid>

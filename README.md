@@ -8,7 +8,7 @@ Leitor OPML
 - Listar feeds por categoria
 - Lista artigos do feed
 - Job para armazenar os artigos
-- Marcar ocmo lido
+- Marcar como lido
 
 # Publicar imagem local
 
@@ -23,7 +23,16 @@ A imagem `local/git-rss-reader-web` estará disponível.
 # Rodando
 
 ```
-docker run -p 8080:8080 local/git-rss-reader-web
+docker run [variaveis] -p 8080:8080 local/git-rss-reader-web
 ```
 
 Acessar `http://localhost:8080`
+
+## Variáveis de ambiente
+
+| Nome | Descrição | Exemplo |
+| - | -| - |
+| Git__Repository| - |- |
+| Git__Username| - | - |
+| Git__Password| PAT | - |
+| Git__OpmlFilePath |- |

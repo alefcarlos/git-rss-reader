@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+    <PropertyGroup>
+      <UserSecretsId>cbd618c7-c567-49a7-8e45-8afa646dcb37</UserSecretsId>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" />
         <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
@@ -9,8 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="opml.xml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <ProjectReference Include="..\GitRssReader.GitIntegration\GitRssReader.GitIntegration.csproj" />
     </ItemGroup>
 </Project>
