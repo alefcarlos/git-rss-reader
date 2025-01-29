@@ -2,6 +2,9 @@
 using GitRssReader.Web.Components;
 using GitRssReader.GitIntegration;
 using GitRssReader.Web.GitTasks;
+using GitRssReader.Web.Data;
+using Microsoft.EntityFrameworkCore;
+using GitRssReader.Web.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,10 @@ builder.Services.AddSingleton<GitOperations>();
 builder.Services.AddHostedService<CloneRepositoryTask>();
 
 builder.Services.AddFeedsCollectionProvider();
+
+builder.Services.AddDbContextFactory<AppDbContext>(opt => opt.UseInMemoryDatabase("db"));
+
+builder.Services.AddHostedService<ImportNewArticlesTask>();
 
 var app = builder.Build();
 

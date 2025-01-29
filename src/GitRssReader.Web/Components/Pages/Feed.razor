@@ -1,7 +1,10 @@
 ﻿@page "/feed/{categorySlug}/{target}"
 @attribute [StreamRendering]
+@using GitRssReader.Web.Data
+@using Microsoft.EntityFrameworkCore
 @using SimpleFeedReader
 @inject FeedsCollectionProvider FeedsProvider
+@inject IDbContextFactory<AppDbContext> DbFactory;
 
 <h1>@feedInfo.Title</h1>
 
@@ -16,9 +19,10 @@ else
 {
     <FluentDataGrid Items="@entries.AsQueryable()">
         <TemplateColumn Title="Título">
-            <FluentAnchor Appearance="Appearance.Hypertext" Target="_blank" Href="@context.Uri.ToString()">@context.Title</FluentAnchor>
+            <FluentAnchor Appearance="Appearance.Hypertext" Target="_blank" Href="@context.Url">@context.Title</FluentAnchor>
         </TemplateColumn>
-        <PropertyColumn Title="Data de publicação" Property="@(a => a.PublishDate)" Format="dd/MM/yyy" />
+        <PropertyColumn Title="Data de publicação" Property="@(a => a.PublishedDate)" Format="dd/MM/yyy" />
+        <PropertyColumn Title="Lido" Property="@(a => a.IsRead)" />
     </FluentDataGrid>
 }
 
@@ -29,17 +33,16 @@ else
     [Parameter]
     public required string Target { get; set; }
 
-    List<FeedItem>? entries = null;
+    List<Article>? entries = null;
     FeedEntry feedInfo = default!;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
+        entries = null;
         var cat = FeedsProvider.Data.FirstOrDefault(x => x.Slug == CategorySlug);
-
         feedInfo = cat!.Feeds.First(x => x.Slug == Target);
-        
-        var reader = new FeedReader();
-        entries = reader.RetrieveFeed(feedInfo.XmlUrl.ToString()).ToList();
-        StateHasChanged();
+
+        using var context = await DbFactory.CreateDbContextAsync();
+        entries = await context.Articles.Where(x => x.FeedSlug == Target).ToListAsync();
     }
 }

@@ -32,7 +32,9 @@ Acessar `http://localhost:8080`
 
 | Nome | Descrição | Exemplo |
 | - | -| - |
-| Git__Repository| - |- |
-| Git__Username| - | - |
-| Git__Password| PAT | - |
-| Git__OpmlFilePath |- |
+| GIT__REPOSITORY\*| - |- |
+| GIT__USERNAME\*| - | - |
+| GIT__PASSWORD\*| PAT | - |
+| GIT__OPMLFILEPATH\* |- |
+
+> \* São orbigatórios 
