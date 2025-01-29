@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml xmlns:frss="https://freshrss.org/opml" version="2.0">
+  <head>
+    <title>FreshRSS</title>
+    <dateCreated>Thu, 16 Jan 2025 18:45:25 +0000</dateCreated>
+  </head>
+  <body>
+    <outline text="RedHat">
+      <outline text="Architect" type="rss" xmlUrl="https://www.redhat.com/en/rss/blog" htmlUrl="https://www.redhat.com/architect/" description="Red Hat Blog"/>
+    </outline>
+    <outline text="Uncategorized">
+      <outline text="Rinor Maloku" type="rss" xmlUrl="https://feeds.feedburner.com/RinorMaloku" htmlUrl="https://rinormaloku.com/" description="Master one tool at a time..."/>
+      <outline text="Rogerio Angeliski" type="rss" xmlUrl="https://angeliski.com.br/rss.xml" htmlUrl="https://angeliski.com.br/" description="Eu acredito que a tecnologia é um meio, uma ferramenta, não o fim.&#10;Gosto de escrever código, mas prefiro gerar valor e pra isso nem sempre é preciso escrever código."/>
+      <outline text="Stories by Jhansi Karee on Medium" type="rss" xmlUrl="https://medium.com/@jhansireddy007/feed" htmlUrl="https://medium.com/@jhansireddy007?source=rss-1edede9f249------2" description="Stories by Jhansi Karee on Medium"/>
+      <outline text="Stories by Kostia Palchyk on Medium" type="rss" xmlUrl="https://medium.com/@kddsky/feed" htmlUrl="https://medium.com/@kddsky?source=rss-6df2101c466------2" description="Stories by Kostia Palchyk on Medium"/>
+      <outline text="StreamThoughts - Medium" type="rss" xmlUrl="https://medium.com/feed/streamthoughts" htmlUrl="https://medium.com/streamthoughts?source=rss----ba48d3a65747---4" description="We are a small team of experts. By helping our customers to make values out of their data as real-time event streams through our expertise, solutions and partners, we open up unprecedented possibilities for them to innovate, evolve and adapt to their future business challenges. - Medium"/>
+      <outline text="System Design Newsletter" type="rss" xmlUrl="https://newsletter.systemdesign.one/feed" htmlUrl="https://newsletter.systemdesign.one/" description="A weekly newsletter to help you pass system design interview and become good at work"/>
+    </outline>
+    <outline text="dotnet">
+      <outline text=".NET Blog" type="rss" xmlUrl="https://devblogs.microsoft.com/dotnet/feed/" htmlUrl="https://devblogs.microsoft.com/dotnet" description="Free. Cross-platform. Open source. A developer platform for building all your apps."/>
+      <outline text="Adam Sitnik" type="rss" xmlUrl="https://adamsitnik.com/feed.xml" htmlUrl="https://adamsitnik.com/" description=".NET Performance and Reliability"/>
+      <outline text="Andrew Lock | .NET Escapades" type="rss" xmlUrl="https://andrewlock.net/rss.xml" htmlUrl="https://andrewlock.net/" description="Hi, my name is Andrew, or ‘Sock’ to most people. This blog is where I share my experiences as I journey into ASP.NET Core."/>
+      <outline text="André Snede" type="rss" xmlUrl="https://snede.net/feed/" htmlUrl="https://snede.net/" description="Developer blog"/>
+      <outline text="anthonychu.ca" type="rss" xmlUrl="https://anthonychu.ca/feed/rss/index.xml" htmlUrl="https://anthonychu.ca/" description="Anthony Chu's Blog"/>
+      <outline text="Anthony Giretti's .NET blog" type="rss" xmlUrl="https://anthonygiretti.com/feed/" htmlUrl="https://anthonygiretti.com/" description="Ain't no mountain high enough"/>
+      <outline text="Anthony Simmon" type="rss" xmlUrl="https://anthonysimmon.com/index.xml" htmlUrl="https://anthonysimmon.com/" description="Recent content on Anthony Simmon"/>
+      <outline text="Ayende @ Rahien" type="rss" xmlUrl="https://feeds.feedburner.com/AyendeRahien" htmlUrl="https://ayende.com/blog/" description="Ayende @ Rahien"/>
+      <outline text="Blanch on Code" type="rss" xmlUrl="https://www.macrosssoftware.com/feed/" htmlUrl="https://www.macrosssoftware.com/" description=".NET Programming Blog"/>
+      <outline text="Code, code and more code." type="rss" xmlUrl="https://www.blogger.com/feeds/8184237816669520763/posts/default?redirect=false" htmlUrl="http://blog.marcgravell.com/"/>
+      <outline text="Code 4 IT blog" type="rss" xmlUrl="https://www.code4it.dev/index.xml" htmlUrl="https://www.code4it.dev/" description="Recent content on Code4IT"/>
+      <outline text="Coding Militia" type="rss" xmlUrl="https://blog.codingmilitia.com/feed.xml" htmlUrl="https://blog.codingmilitia.com/" description="Recent content on Coding Militia"/>
+      <outline text="csharp.christiannagel.com" type="rss" xmlUrl="https://csharp.christiannagel.com/feed/" htmlUrl="https://csharp.christiannagel.com/" description="Christian Nagel and the CN innovation team about .NET Aspire, C#, Azure, ASP.NET Core, WinUI, .NET MAUI, and more"/>
+      <outline text="Dotnetos" type="rss" xmlUrl="https://dotnetos.org/feed.xml" htmlUrl="https://dotnetos.org/" description="Jekyll source for dotnetos.org"/>
+      <outline text="elmah.io Blog" type="rss" xmlUrl="https://blog.elmah.io/rss/" htmlUrl="https://blog.elmah.io/" description="On the elmah.io blog, the team behind elmah.io blog about new features and technologies either used to build elmah.io or of general interest."/>
+      <outline text="Enterprise Craftsmanship" type="rss" xmlUrl="https://enterprisecraftsmanship.com/index.xml" htmlUrl="https://enterprisecraftsmanship.com/" description="Recent content on Enterprise Craftsmanship"/>
+      <outline text="gaGO.io" type="rss" xmlUrl="https://feeds.feedburner.com/luizcarlosfaria" htmlUrl="https://gago.io/" description="Developer, Architect, Blogger, Speaker..."/>
+      <outline text="Gary Woodfine" type="rss" xmlUrl="https://garywoodfine.com/feed/" htmlUrl="https://garywoodfine.com/" description="Opinionated Software Development"/>
+      <outline text="Gowtham K" type="rss" xmlUrl="https://gowthamcbe.com/feed/" htmlUrl="https://gowthamcbe.com/" description="Coder &amp; Traveler"/>
+      <outline text="Guilherme Ferreira" type="rss" xmlUrl="https://guiferreira.me/feed.xml" htmlUrl="https://gsferreira.com/" description="Software Architect and a minimalist aspirant. passionate by product development and a continuous improvement enthusiast."/>
+      <outline text="Henrique Mauri" type="rss" xmlUrl="https://henriquemauri.net/feed/" htmlUrl="https://henriquemauri.net/" description=".NET e Azure"/>
+      <outline text="InfoQ - .NET" type="rss" xmlUrl="https://feed.infoq.com/dotnet/" htmlUrl="https://www.infoq.com/" description="InfoQ .NET feed"/>
+      <outline text="Irina Scurtu" type="rss" xmlUrl="https://irina.codes/feed/feed.xml" htmlUrl="https://irina.codes/" description="Software architect, independent consultant and .NET developer, speaker, teacher, community conference organizer, and Microsoft MVP for Development Technologies based in Romania"/>
+      <outline text="Jared Parsons" type="rss" xmlUrl="https://blog.paranoidcoding.org/atom.xml" htmlUrl="https://blog.paranoidcoding.org"/>
+      <outline text="Jeremy Skinner" type="rss" xmlUrl="https://jeremyskinner.co.uk/feed.xml" htmlUrl="https://jeremyskinner.co.uk/" description="using System.DraggyDroppy;"/>
+      <outline text="Khalid Abuhakmeh" type="rss" xmlUrl="https://khalidabuhakmeh.com/feed.xml" htmlUrl="https://khalidabuhakmeh.com/" description="Khalid is a product designer, traveler, respected community member, and open source contributor."/>
+      <outline text="Kristoffer Strube’s Blog" type="rss" xmlUrl="https://kristoffer-strube.dk/RSS.xml" htmlUrl="https://kristoffer-strube.dk/" description="On this blog I will post about my hobby projects involving .NET, Blazor, browser specifications, and much more!"/>
+      <outline text="Low Level Design" type="rss" xmlUrl="https://lowleveldesign.wordpress.com/feed/" htmlUrl="https://lowleveldesign.org/" description="By Sebastian Solnica"/>
+      <outline text="Martin Costello's Blog" type="rss" xmlUrl="https://blog.martincostello.com/feed.xml" htmlUrl="https://blog.martincostello.com/" description="The blog of a software developer and tester."/>
+      <outline text="Meziantou's blog" type="rss" xmlUrl="https://www.meziantou.net/feed.rss" htmlUrl="https://www.meziantou.net/" description="Blog about Microsoft technologies (.NET, ASP.NET Core, Blazor, EF Core, WPF, TypeScript, etc.)"/>
+      <outline text="Microsoft Tech Community - Latest Blogs - Desenvolvedores BR" type="rss" xmlUrl="https://techcommunity.microsoft.com/plugins/custom/microsoft/o365/custom-blog-rss?tid=-2222926239784671136&amp;board=DesenvolvedoresBR&amp;size=25" htmlUrl="https://techcommunity.microsoft.com/" description="Desenvolvedores BR"/>
+      <outline text="minidump.net" type="rss" xmlUrl="https://minidump.net/index.xml" htmlUrl="https://minidump.net/" description="Recent content on minidump.net"/>
+      <outline text="my tech ramblings" type="rss" xmlUrl="https://www.mytechramblings.com/index.xml" htmlUrl="https://www.mytechramblings.com/" description="Recent content on my tech ramblings"/>
+      <outline text="n+1 IT blog" type="rss" xmlUrl="https://nikiforovall.github.io/feed.xml" htmlUrl="https://nikiforovall.github.io/" description="Blog"/>
+      <outline text="nietras" type="rss" xmlUrl="https://nietras.com/feed.xml" htmlUrl="http://nietras.com/" description="Programming, mechanical sympathy, machine learning and .NET ❤."/>
+      <outline text="Oleg Karasik's blog" type="rss" xmlUrl="https://olegkarasik.wordpress.com/feed/" htmlUrl="https://olegkarasik.wordpress.com/" description="A .NET Software Engineer's notes"/>
+      <outline text="Pavel's Blog" type="rss" xmlUrl="https://scorpiosoftware.net/feed/" htmlUrl="https://scorpiosoftware.net/" description="Adventures in Coding, Internals and Learning"/>
+      <outline text="Performance is a Feature!" type="rss" xmlUrl="https://mattwarren.org/atom.xml" htmlUrl="http://www.mattwarren.org/"/>
+      <outline text="Rick Strahl's Web Log" type="rss" xmlUrl="https://feeds.feedburner.com/rickstrahl" htmlUrl="http://weblog.west-wind.com/" description="Life, Surf, Code and everything in between"/>
+      <outline text="Scott Hanselman's Blog" type="rss" xmlUrl="https://feeds.hanselman.com/ScottHanselman" htmlUrl="https://www.hanselman.com/blog/" description="Scott Hanselman on Programming, User Experience, The Zen of Computers and Life in General"/>
+      <outline text="Software Engineering" type="rss" xmlUrl="https://damienbod.com/feed/" htmlUrl="https://damienbod.com/" description="Web development"/>
+      <outline text="Stephen Cleary (the blog)" type="rss" xmlUrl="https://feeds.feedburner.com/NitoPrograms" htmlUrl="https://blog.stephencleary.com/" description="Stephen Cleary's blog: async/await, programming, language design, and other sundry computer science topics."/>
+      <outline text="Steve Gordon" type="rss" xmlUrl="https://www.stevejgordon.co.uk/feed" htmlUrl="https://www.stevejgordon.co.uk/" description="Adventures in .NET"/>
+      <outline text="Steven Giesel" type="rss" xmlUrl="https://steven-giesel.com/feed.rss" htmlUrl="https://steven-giesel.com/" description="Hey, I'm Steven a .NET Developer and Freelancer in Zurich, Switzerland. I am a Microsoft MVP. Also, this blog is open source on  GitHub."/>
+      <outline text="Stories by Christophe Nasarre on Medium" type="rss" xmlUrl="https://medium.com/@chnasarre/feed" htmlUrl="https://medium.com/@chnasarre?source=rss-a7db8195a2bf------2" description="Stories by Christophe Nasarre on Medium"/>
+      <outline text="Stories by Kevin Gosse on Medium" type="rss" xmlUrl="https://medium.com/@kevingosse/feed" htmlUrl="https://medium.com/@kevingosse?source=rss-bcbbadd2beb5------2" description="Stories by Kevin Gosse on Medium"/>
+      <outline text="Stories by Thiago Barradas on Medium" type="rss" xmlUrl="https://medium.com/@thiagobarradas/feed" htmlUrl="https://medium.com/@thiagobarradas?source=rss-fe6a7e61fc------2" description="Stories by Thiago Barradas on Medium"/>
+      <outline text="StrathWeb. A free flowing web tech monologue." type="rss" xmlUrl="https://www.strathweb.com/posts/index.xml" htmlUrl="https://www.strathweb.com/" description="Recent content in Archive on Strathweb. A free flowing tech monologue."/>
+      <outline text="Stuart Lang" type="rss" xmlUrl="https://stu.dev/rss/" htmlUrl="https://stu.dev/" description="Stuart Lang"/>
+      <outline text="Telerik Blogs | Web | Blazor" type="rss" xmlUrl="https://feeds.telerik.com/blogs/web-blazor" htmlUrl="https://www.telerik.com/" description="The official blog of Progress Telerik - expert articles and tutorials for developers."/>
+      <outline text="The art of simplicity" type="rss" xmlUrl="https://bartwullems.blogspot.com/feeds/posts/default?alt=rss" htmlUrl="https://bartwullems.blogspot.com/"/>
+      <outline text="The Visual Studio Blog" type="rss" xmlUrl="https://devblogs.microsoft.com/visualstudio/feed/" htmlUrl="https://devblogs.microsoft.com/visualstudio" description="The official source of product insight from the Visual Studio Engineering Team"/>
+      <outline text="Thomas Levesque's .NET Blog" type="rss" xmlUrl="https://thomaslevesque.com/index.xml" htmlUrl="https://thomaslevesque.com/" description="Recent content on Thomas Levesque's .NET Blog"/>
+      <outline text="TooSlowException" type="rss" xmlUrl="https://tooslowexception.com/feed/" htmlUrl="https://tooslowexception.com/" description="Performance, architecture, Software Craftmanship..."/>
+      <outline text="Visual C# – .NET Blog" type="rss" xmlUrl="https://devblogs.microsoft.com/dotnet/tag/c/feed/" htmlUrl="https://devblogs.microsoft.com/dotnet" description="Free. Cross-platform. Open source. A developer platform for building all your apps."/>
+      <outline text="Yet another developer blog" type="rss" xmlUrl="https://feeds.feedburner.com/YetAnotherDeveloperBlog" htmlUrl="http://www.tpeczek.com/"/>
+      <outline text="You’ve Been Haacked" type="rss" xmlUrl="https://haacked.com/atom.xml" htmlUrl="https://haacked.com/" description="You've been Haacked is a blog about Technology, Software, Management, and Open Source. It's full of good stuff."/>
+    </outline>
+  </body>
+</opml>

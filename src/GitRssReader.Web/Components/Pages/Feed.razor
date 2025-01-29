@@ -1,0 +1,45 @@
+﻿@page "/feed/{categorySlug}/{target}"
+@attribute [StreamRendering]
+@using SimpleFeedReader
+@inject FeedsCollectionProvider FeedsProvider
+
+<h1>@feedInfo.Title</h1>
+
+<p>@feedInfo.Description</p>
+
+@if (entries == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <FluentDataGrid Items="@entries.AsQueryable()">
+        <PropertyColumn Property="@(a => a.Title)" />
+        <PropertyColumn Property="@(a => a.Url)" />
+    </FluentDataGrid>
+}
+
+@code {
+    [Parameter]
+    public required string CategorySlug { get; set; }
+
+    [Parameter]
+    public required string Target { get; set; }
+
+    public record Entry(string Title, string Url);
+
+    List<Entry>? entries = null;
+    FeedEntry feedInfo = default!;
+
+    protected override void OnParametersSet()
+    {
+        var cat = FeedsProvider.Data.FirstOrDefault(x => x.Slug == CategorySlug);
+
+        feedInfo = cat!.Feeds.First(x => x.Slug == Target);
+        
+        var reader = new FeedReader();
+        var feed = reader.RetrieveFeed(feedInfo.XmlUrl.ToString());
+        entries = feed.Select(item => new Entry(item.Title, item.Uri.ToString())).ToList();
+        StateHasChanged();
+    }
+}

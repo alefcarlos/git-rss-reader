@@ -1,7 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" />
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" />
+        <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
+        <PackageReference Include="SimpleFeedReader" />
+        <PackageReference Include="OPMLCore.NET" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.AutoActivation" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="opml.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 </Project>

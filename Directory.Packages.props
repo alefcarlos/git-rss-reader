@@ -2,10 +2,16 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+  <!-- Others -->
+  <ItemGroup>
+    <PackageVersion Include="SimpleFeedReader" Version="1.0.9" />
+    <PackageVersion Include="OPMLCore.NET" Version="1.0.0" />
+  </ItemGroup>
   <!-- Microsoft -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.3" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.3" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Emoji" Version="4.11.3" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.AutoActivation" Version="9.1.0" />
   </ItemGroup>
 </Project>
