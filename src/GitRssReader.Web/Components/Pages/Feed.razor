@@ -6,6 +6,7 @@
 <h1>@feedInfo.Title</h1>
 
 <p>@feedInfo.Description</p>
+<FluentAnchor Appearance="Appearance.Lightweight" Href="@feedInfo.SiteUrl.ToString()">Acessar o site</FluentAnchor>
 
 @if (entries == null)
 {
@@ -14,8 +15,10 @@
 else
 {
     <FluentDataGrid Items="@entries.AsQueryable()">
-        <PropertyColumn Property="@(a => a.Title)" />
-        <PropertyColumn Property="@(a => a.Url)" />
+        <TemplateColumn Title="Título">
+            <FluentAnchor Appearance="Appearance.Hypertext" Href="@context.Uri.ToString()">@context.Title</FluentAnchor>
+        </TemplateColumn>
+        <PropertyColumn Title="Data de publicação" Property="@(a => a.PublishDate)" Format="dd/MM/yyy" />
     </FluentDataGrid>
 }
 
@@ -26,9 +29,7 @@ else
     [Parameter]
     public required string Target { get; set; }
 
-    public record Entry(string Title, string Url);
-
-    List<Entry>? entries = null;
+    List<FeedItem>? entries = null;
     FeedEntry feedInfo = default!;
 
     protected override void OnParametersSet()
@@ -38,8 +39,7 @@ else
         feedInfo = cat!.Feeds.First(x => x.Slug == Target);
         
         var reader = new FeedReader();
-        var feed = reader.RetrieveFeed(feedInfo.XmlUrl.ToString());
-        entries = feed.Select(item => new Entry(item.Title, item.Uri.ToString())).ToList();
+        entries = reader.RetrieveFeed(feedInfo.XmlUrl.ToString()).ToList();
         StateHasChanged();
     }
 }
