@@ -16,7 +16,7 @@
 
 <p>@feedInfo.Description</p>
 
-<FluentButton IconStart="@(new Icons.Regular.Size20.MailReadMultiple())" OnClick="@(() => MarkAsReadAsync())">Marcar como lido</FluentButton>
+<FluentButton Color="var(--warning)" IconStart="@(new Icons.Regular.Size20.MailReadMultiple())" OnClick="@(() => MarkAsReadAsync())">Marcar como lido</FluentButton>
 <FluentButton Appearance="@(onlyRead ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailRead())" OnClick="@(() => FilterOnlyRead())">Ver somente lidos</FluentButton>
 <FluentButton Appearance="@(onlyUnread ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailUnread())" OnClick="@(() => FilterOnlyUnread())">Ver somente não lidos</FluentButton>
 
@@ -29,7 +29,7 @@ else
     <FluentDataGrid Items="@entries.AsQueryable()">
         <TemplateColumn Title="Título">
             <FluentButton Appearance="@(context.IsRead ? Appearance.Stealth : Appearance.Lightweight)"
-            OnClick="@(() => OpenLinkAsync(context.Url))">
+                          OnClick="@(() => OpenLinkAsync(context.Url))">
                 @context.Title
             </FluentButton>
         </TemplateColumn>
@@ -69,6 +69,11 @@ else
 
     public async Task MarkAsReadAsync()
     {
+        using var context = await DbFactory.CreateDbContextAsync();
+        await context.Articles
+            .Where(x => x.FeedSlug == Target && !x.IsRead)
+            .ExecuteUpdateAsync(p => p.SetProperty(x => x.IsRead, true));
+
         await FilterOnlyUnread();
 
         var action = new MarkFeedAsReadAction(Target);
