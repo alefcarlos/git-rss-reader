@@ -55,6 +55,13 @@ public class ImportNewArticlesTask : BackgroundService
             {
                 var entries = reader.RetrieveFeed(feed.XmlUrl.ToString());
 
+                //Verificar se tem novos artigos
+                if (!entries.Any(x => x.PublishDate > control.LastImport))
+                {
+                    _logger.LogInformation("Não existe novos artigos para o feed {feedTitle}", feed.Title);
+                    continue;
+                }
+
                 var tasks = entries
                         .Where(x => x.PublishDate > control.LastImport)
                         .Select(x => ProcessEntry(x, feed.Title, feed.Slug, category.Slug))
@@ -68,6 +75,7 @@ public class ImportNewArticlesTask : BackgroundService
                 continue;
             }
 
+            _logger.LogInformation("Novos artigos importados para o feed {feedTitle}", feed.Title);
             control.LastImport = DateTime.Now;
         }
 
