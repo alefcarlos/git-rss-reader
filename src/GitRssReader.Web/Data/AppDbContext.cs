@@ -12,6 +12,21 @@ public class AppDbContext : DbContext
     {
 
     }
+
+    public async Task<Dictionary<string, int>> GetTotalUnreadByFeedAsync()
+    {
+        var query = Articles
+            .Where(x => !x.IsRead)
+            .GroupBy(x => x.FeedSlug)
+            .Select(g => new GroupUnread(g.Key, g.Count()))
+            ;
+
+        var list = await query.ToListAsync();
+
+        return list.ToDictionary(g => g.Slug, g => g.TotalUnread);
+    }
+
+    public record GroupUnread(string Slug, int TotalUnread);
 }
 
 public class Article

@@ -5,6 +5,9 @@
 @using SimpleFeedReader
 @inject FeedsCollectionProvider FeedsProvider
 @inject IDbContextFactory<AppDbContext> DbFactory;
+@inject IJSRuntime JS
+
+<PageTitle>Feed @feedInfo.Title</PageTitle>
 
 <h1>@feedInfo.Title</h1>
 
@@ -19,7 +22,11 @@ else
 {
     <FluentDataGrid Items="@entries.AsQueryable()">
         <TemplateColumn Title="Título">
-            <FluentAnchor Appearance="Appearance.Hypertext" Target="_blank" Href="@context.Url">@context.Title</FluentAnchor>
+            <FluentButton
+            Appearance="@(context.IsRead ? Appearance.Stealth : Appearance.Lightweight)"
+                          OnClick="@(() => OpenLinkAsync(context.Url))">
+                @context.Title
+            </FluentButton>
         </TemplateColumn>
         <PropertyColumn Title="Data de publicação" Property="@(a => a.PublishedDate)" Format="dd/MM/yyy" />
         <PropertyColumn Title="Lido" Property="@(a => a.IsRead)" />
@@ -43,6 +50,14 @@ else
         feedInfo = cat!.Feeds.First(x => x.Slug == Target);
 
         using var context = await DbFactory.CreateDbContextAsync();
-        entries = await context.Articles.Where(x => x.FeedSlug == Target).ToListAsync();
+        entries = await context.Articles
+            .Where(x => x.FeedSlug == Target)
+            .OrderByDescending(x => x.PublishedDate)
+            .ToListAsync();
+    }
+
+    public async Task OpenLinkAsync(string url)
+    {
+        await JS.InvokeVoidAsync("open", url, "_blank");
     }
 }

@@ -1,4 +1,7 @@
-﻿@using OPMLCore.NET
+﻿@using GitRssReader.Web.Data
+@using Microsoft.EntityFrameworkCore
+@using OPMLCore.NET
+@inject IDbContextFactory<AppDbContext> DbFactory;
 
 @inject FeedsCollectionProvider FeedsProvider
 <div class="navmenu">
@@ -13,6 +16,10 @@
                     @foreach (var feed in category.Feeds)
                     {
                         <FluentNavLink Href="@($"/feed/{category.Slug}/{feed.Slug}")" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.News())" IconColor="Color.Accent">
+                            @if (unread.ContainsKey(feed.Slug))
+                            {
+                                <FluentBadge Circular=true Appearance="Appearance.Accent" slot="start">@unread[feed.Slug]</FluentBadge>
+                            }
                             @feed.Title
                         </FluentNavLink>
                     }
@@ -24,4 +31,12 @@
 
 @code {
     private bool expanded = true;
+    private Dictionary<string, int> unread = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = await DbFactory.CreateDbContextAsync();
+
+        unread = await context.GetTotalUnreadByFeedAsync();
+    }
 }
