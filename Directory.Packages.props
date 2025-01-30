@@ -4,14 +4,17 @@
   </PropertyGroup>
   <!-- Others -->
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
     <PackageVersion Include="SimpleFeedReader" Version="1.0.9" />
     <PackageVersion Include="OPMLCore.NET" Version="1.0.0" />
+    <PackageVersion Include="Fluxor.Blazor.Web" Version="6.5.2" />
+    <PackageVersion Include="Fluxor.Blazor.Web.ReduxDevTools" Version="6.5.2" />
   </ItemGroup>
   <!-- Microsoft -->
   <ItemGroup>
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.3" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.3" />

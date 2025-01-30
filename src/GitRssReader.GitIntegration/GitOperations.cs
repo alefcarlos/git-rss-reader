@@ -17,7 +17,7 @@ public class GitOperations
 
     public void Clone()
     {
-        var localRepoPath = Path.Combine(Path.GetTempPath(), "repo");
+        var localRepoPath = Path.Combine(Path.GetTempPath(), "git-rss-reader-web", "repo");
 
         if (!Directory.Exists(localRepoPath))
         {

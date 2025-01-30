@@ -31,7 +31,6 @@ public class ImportNewArticlesTask : BackgroundService
                 .Select(x => ProcessCategory(x, stoppingToken))
                 .ToArray());
 
-
             _logger.LogInformation("Scrapping de feeds finalizado");
 
             await Task.Delay(TimeSpan.FromDays(1), stoppingToken);

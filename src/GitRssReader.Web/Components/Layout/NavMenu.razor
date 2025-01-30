@@ -1,9 +1,15 @@
-﻿@using GitRssReader.Web.Data
+﻿@using Fluxor
+@using GitRssReader.Web.Data
+@using GitRssReader.Web.Feed
 @using Microsoft.EntityFrameworkCore
 @using OPMLCore.NET
-@inject IDbContextFactory<AppDbContext> DbFactory;
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
+@inject IDbContextFactory<AppDbContext> DbFactory;
+@inject IState<UnreadFeedsState> UnreadFeedsState;
+@inject IDispatcher Dispatcher
 @inject FeedsCollectionProvider FeedsProvider
+
 <div class="navmenu">
     <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
     <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
@@ -16,9 +22,9 @@
                     @foreach (var feed in category.Feeds)
                     {
                         <FluentNavLink Href="@($"/feed/{category.Slug}/{feed.Slug}")" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.News())" IconColor="Color.Accent">
-                            @if (unread.ContainsKey(feed.Slug))
+                            @if (UnreadFeedsState.Value.UnreadFeeds.ContainsKey(feed.Slug))
                             {
-                                <FluentBadge Circular=true Appearance="Appearance.Accent" slot="start">@unread[feed.Slug]</FluentBadge>
+                                <FluentBadge Circular=true Appearance="Appearance.Accent" slot="start">@UnreadFeedsState.Value.UnreadFeeds[feed.Slug]</FluentBadge>
                             }
                             @feed.Title
                         </FluentNavLink>
@@ -31,12 +37,10 @@
 
 @code {
     private bool expanded = true;
-    private Dictionary<string, int> unread = [];
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        using var context = await DbFactory.CreateDbContextAsync();
-
-        unread = await context.GetTotalUnreadByFeedAsync();
+        base.OnInitialized();
+        Dispatcher.Dispatch(new FetchAllUnreadAction());
     }
 }
