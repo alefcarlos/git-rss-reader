@@ -69,12 +69,7 @@ else
             .Where(x => !x.IsRead && x.FeedSlug == Target)
             .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsRead, true));
 
-
-        var action = new MarkFeedAsReadAction
-            {
-                Feed = Target
-            };
-
+        var action = new MarkFeedAsReadAction(Target);
         Dispatcher.Dispatch(action);
     }
 }
