@@ -17,7 +17,9 @@ namespace GitRssReader.Web.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    FeedName = table.Column<string>(type: "TEXT", nullable: false),
                     FeedSlug = table.Column<string>(type: "TEXT", nullable: false),
+                    FeedCategorySlug = table.Column<string>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
                     PublishedDate = table.Column<DateTime>(type: "TEXT", nullable: false),

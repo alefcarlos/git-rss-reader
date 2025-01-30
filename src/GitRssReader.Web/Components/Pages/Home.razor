@@ -1,7 +1,36 @@
 ﻿@page "/"
+@inject IDbContextFactory<AppDbContext> DbFactory;
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<p>Esses são os feeds prontos para serem lidos ;)</p>
 
-Welcome to your new Fluent Blazor app.
+@if (entries == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <FluentDataGrid Items="@entries.AsQueryable()">
+        <TemplateColumn Title="Nome">
+            <FluentAnchor Href="@($"/feed/{context.FeedCategory}/{context.FeedSlug}")">@context.Name</FluentAnchor>
+        </TemplateColumn>
+    </FluentDataGrid>
+}
+
+@code {
+    List<Feed>? entries = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = await DbFactory.CreateDbContextAsync();
+        entries = await context.Articles
+            .Where(x => !x.IsRead)
+            .GroupBy(x => new { x.FeedName, x.FeedSlug, x.FeedCategorySlug })
+            .Select(x => new Feed(x.Key.FeedName, x.Key.FeedSlug, x.Key.FeedCategorySlug))
+            .ToListAsync();
+
+    }
+
+    internal record Feed(string Name, string FeedSlug, string FeedCategory);
+}

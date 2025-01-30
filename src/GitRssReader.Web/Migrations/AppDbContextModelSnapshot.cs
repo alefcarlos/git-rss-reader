@@ -23,6 +23,14 @@ namespace GitRssReader.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FeedCategorySlug")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FeedName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FeedSlug")
                         .IsRequired()
                         .HasColumnType("TEXT");

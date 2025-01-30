@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using GitRssReader.Web.Tasks;
 using Fluxor;
 using GitRssReader.Web;
+#if DEBUG
 using Fluxor.Blazor.Web.ReduxDevTools;
+#endif
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +45,6 @@ builder.Services.AddFluxor(options =>
     options.UseReduxDevTools(o =>
     {
         o.Name = "git-rss-reader-web";
-        o.EnableStackTrace();
     });
 #endif
 });

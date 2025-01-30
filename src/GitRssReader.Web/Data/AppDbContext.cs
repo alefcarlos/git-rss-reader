@@ -32,7 +32,9 @@ public class AppDbContext : DbContext
 public class Article
 {
     public int Id { get; set; }
+    public required string FeedName { get; set; }
     public required string FeedSlug { get; set; }
+    public required string FeedCategorySlug { get; set; }
     public required string Title { get; set; }
     public required string Url { get; set; }
     public DateTime PublishedDate { get; set; }

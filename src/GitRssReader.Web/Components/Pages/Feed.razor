@@ -10,12 +10,15 @@
 
 <PageTitle>Feed @feedInfo.Title</PageTitle>
 
-<h1>@feedInfo.Title</h1>
+<h1>
+    @feedInfo.Title <FluentAnchor Appearance="Appearance.Lightweight" Href="@feedInfo.SiteUrl.ToString()" Target="_blank">Acessar o site</FluentAnchor>
+</h1>
 
 <p>@feedInfo.Description</p>
-<FluentAnchor Appearance="Appearance.Lightweight" Href="@feedInfo.SiteUrl.ToString()" Target="_blank">Acessar o site</FluentAnchor>
 
-<FluentButton OnClick="@(() => MarkAsReadAsync())">Marcar como lido</FluentButton>
+<FluentButton IconStart="@(new Icons.Regular.Size20.MailReadMultiple())" OnClick="@(() => MarkAsReadAsync())">Marcar como lido</FluentButton>
+<FluentButton Appearance="@(onlyRead ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailRead())" OnClick="@(() => FilterOnlyRead())">Ver somente lidos</FluentButton>
+<FluentButton Appearance="@(onlyUnread ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailUnread())" OnClick="@(() => FilterOnlyUnread())">Ver somente não lidos</FluentButton>
 
 @if (entries == null)
 {
@@ -43,6 +46,8 @@ else
 
     List<Article>? entries = null;
     FeedEntry feedInfo = default!;
+    private bool onlyUnread = true;
+    private bool onlyRead = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -52,7 +57,7 @@ else
 
         using var context = await DbFactory.CreateDbContextAsync();
         entries = await context.Articles
-            .Where(x => x.FeedSlug == Target)
+            .Where(x => x.FeedSlug == Target && !x.IsRead)
             .OrderByDescending(x => x.PublishedDate)
             .ToListAsync();
     }
@@ -64,12 +69,33 @@ else
 
     public async Task MarkAsReadAsync()
     {
-        using var context = await DbFactory.CreateDbContextAsync();
-        await context.Articles
-            .Where(x => !x.IsRead && x.FeedSlug == Target)
-            .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsRead, true));
+        await FilterOnlyUnread();
 
         var action = new MarkFeedAsReadAction(Target);
         Dispatcher.Dispatch(action);
+    }
+
+    public async Task FilterOnlyUnread()
+    {
+        using var context = await DbFactory.CreateDbContextAsync();
+        entries = await context.Articles
+            .Where(x => x.FeedSlug == Target && !x.IsRead)
+            .OrderByDescending(x => x.PublishedDate)
+            .ToListAsync();
+
+        onlyRead = false;
+        onlyUnread = true;
+    }
+
+    public async Task FilterOnlyRead()
+    {
+        using var context = await DbFactory.CreateDbContextAsync();
+        entries = await context.Articles
+            .Where(x => x.FeedSlug == Target && x.IsRead)
+            .OrderByDescending(x => x.PublishedDate)
+            .ToListAsync();
+
+        onlyRead = true;
+        onlyUnread = false;
     }
 }

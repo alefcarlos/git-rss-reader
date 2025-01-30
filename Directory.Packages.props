@@ -2,6 +2,10 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+  <!-- Analyzers/Builds -->
+  <ItemGroup>
+    <GlobalPackageReference Include="MinVer" Version="6.0.0" />
+  </ItemGroup>
   <!-- Others -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />

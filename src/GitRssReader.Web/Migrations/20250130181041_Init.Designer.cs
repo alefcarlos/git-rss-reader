@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GitRssReader.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250130032153_Init")]
+    [Migration("20250130181041_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -25,6 +25,14 @@ namespace GitRssReader.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FeedCategorySlug")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FeedName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("FeedSlug")
                         .IsRequired()

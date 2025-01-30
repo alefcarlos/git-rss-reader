@@ -10,20 +10,10 @@ Leitor OPML
 - Job para armazenar os artigos
 - Marcar como lido
 
-# Publicar imagem local
-
-Para publicar imagem docker local
+# Iniciando
 
 ```
-dotnet publish .\src\GitRssReader.Web\ /p:PublishProfile=local
-```
-
-A imagem `local/git-rss-reader-web` estará disponível.
-
-# Rodando
-
-```
-docker run [variaveis] -p 8080:8080 local/git-rss-reader-web
+docker run [variaveis] -p 8080:8080 alefcarlos/git-rss-reader-web
 ```
 
 Acessar `http://localhost:8080`
@@ -38,3 +28,13 @@ Acessar `http://localhost:8080`
 | GIT__OPMLFILEPATH\* |- |
 
 > \* São orbigatórios 
+
+# Publicar imagem local
+
+Para publicar imagem docker local
+
+```
+dotnet publish .\src\GitRssReader.Web\ /p:PublishProfile=local
+```
+
+A imagem `alefcarlos/git-rss-reader-web` estará disponível.

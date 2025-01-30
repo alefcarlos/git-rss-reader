@@ -57,7 +57,7 @@ public class ImportNewArticlesTask : BackgroundService
 
                 var tasks = entries
                         .Where(x => x.PublishDate > control.LastImport)
-                        .Select(x => ProcessEntry(x, feed.Slug))
+                        .Select(x => ProcessEntry(x, feed.Title, feed.Slug, category.Slug))
                         .ToArray();
 
                 await Task.WhenAll(tasks);
@@ -74,14 +74,16 @@ public class ImportNewArticlesTask : BackgroundService
         await context.SaveChangesAsync(stoppingToken);
     }
 
-    public async Task ProcessEntry(FeedItem entry, string feed)
+    public async Task ProcessEntry(FeedItem entry, string feedTitle, string feedSlug, string feedCategorySlug)
     {
         using var context = _dbFactory.CreateDbContext();
 
         context.Articles.Add(new Article
         {
             Title = entry.Title,
-            FeedSlug = feed,
+            FeedSlug = feedSlug,
+            FeedName = feedTitle,
+            FeedCategorySlug = feedCategorySlug,
             PublishedDate = entry.PublishDate.DateTime,
             Url = entry.Uri.ToString()
         });
