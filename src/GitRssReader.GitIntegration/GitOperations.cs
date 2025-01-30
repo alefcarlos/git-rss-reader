@@ -18,12 +18,6 @@ public class GitOperations
     public void Clone()
     {
         var localRepoPath = Path.Combine(Path.GetTempPath(), "git-rss-reader-web", "repo");
-
-        if (!Directory.Exists(localRepoPath))
-        {
-            Directory.CreateDirectory(localRepoPath);
-        }
-
         var opmlFile = Path.Combine(localRepoPath, _options.OpmlFilePath);
 
         OpmlFileProvider.Instance.SetRepoPath(localRepoPath);

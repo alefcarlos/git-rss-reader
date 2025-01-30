@@ -23,11 +23,9 @@ builder.Services.AddOptions<GitOptions>()
     .ValidateOnStart()
     ;
 
-var temp = Path.Combine(Path.GetTempPath(), "git-rss-reader-web");
-var dbPath = Path.Combine(temp, "app.db");
-Directory.CreateDirectory(temp);
+builder.Services.AddHostedService<InitializeFoldersTaks>();
 
-builder.Services.AddDbContextFactory<AppDbContext>(opt => opt.UseSqlite($"Data Source={dbPath}"));
+builder.Services.AddDbContextFactory<AppDbContext>(opt => opt.UseSqlite($"Data Source={Path.Combine(Path.GetTempPath(), "git-rss-reader-web", "data", "app.db")}"));
 builder.Services.AddHostedService<RunMigrationsTask>();
 
 builder.Services.AddSingleton<GitOperations>();
@@ -42,7 +40,11 @@ builder.Services.AddFluxor(options =>
     options.ScanAssemblies(typeof(IWebMarker).Assembly);
 
 #if DEBUG
-    options.UseReduxDevTools();
+    options.UseReduxDevTools(o =>
+    {
+        o.Name = "git-rss-reader-web";
+        o.EnableStackTrace();
+    });
 #endif
 });
 

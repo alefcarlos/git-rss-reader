@@ -1,10 +1,7 @@
 ﻿@page "/feed/{categorySlug}/{target}"
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-@using Fluxor
-@using GitRssReader.Web.Data
-@using GitRssReader.Web.Feed
-@using Microsoft.EntityFrameworkCore
+@using GitRssReader.Web.UnreadFeedUseCase
 @using SimpleFeedReader
 @inject FeedsCollectionProvider FeedsProvider
 @inject IDbContextFactory<AppDbContext> DbFactory;

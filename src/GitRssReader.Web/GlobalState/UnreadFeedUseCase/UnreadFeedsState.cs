@@ -1,6 +1,6 @@
 ﻿using Fluxor;
 
-namespace GitRssReader.Web.Feed;
+namespace GitRssReader.Web.UnreadFeedUseCase;
 
 [FeatureState]
 public class UnreadFeedsState
