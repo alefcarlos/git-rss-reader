@@ -1,11 +1,15 @@
-﻿@using GitRssReader.Web.UnreadFeedUseCase
+﻿@using GitRssReader.Web.Components.Dialogs
+@using GitRssReader.Web.GlobalState.FeedCategotyUseCase
+@using GitRssReader.Web.UnreadFeedUseCase
 @using OPMLCore.NET
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
 @inject IDbContextFactory<AppDbContext> DbFactory;
 @inject IState<UnreadFeedsState> UnreadFeedsState;
+@inject IState<AllFeedsCategoriedState> AllFeedsCategoriedState;
 @inject IDispatcher Dispatcher
-@inject FeedsCollectionProvider FeedsProvider
+@inject IDialogService DialogService
+@inject FeedsCollectionProvider FeedsCollectionProvider
 
 <div class="navmenu">
     <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
@@ -13,17 +17,22 @@
     <nav class="sitenav" aria-labelledby="main-menu">
         <FluentNavMenu Id="main-menu" Collapsible="false" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
             <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-            @foreach (var category in FeedsProvider.Data)
+            <FluentNavLink Icon="@(new Icons.Regular.Size20.BookAdd())" OnClick="() => OpenAddFeedDialog()" IconColor="Color.Accent">Adicionar feed</FluentNavLink>
+            @if (AllFeedsCategoriedState.Value.FeedCategories.Count == 0)
             {
-                <FluentNavGroup Style="margin:10px 0" Title="@category.Title" Icon="@(new Icons.Regular.Size20.TagMultiple())" IconColor="Color.Accent">
-                    @foreach (var feed in category.Feeds)
+                <FluentProgressRing></FluentProgressRing>
+            }
+            @foreach (var (category, feeds) in AllFeedsCategoriedState.Value.FeedCategories)
+            {
+                <FluentNavGroup Style="margin:10px 0" Title="@FeedsCollectionProvider.CategoriesTitles[category]" Icon="@(new Icons.Regular.Size20.TagMultiple())" IconColor="Color.Accent">
+                    @foreach (var (feed, entry) in feeds)
                     {
-                        <FluentNavLink Href="@($"/feed/{category.Slug}/{feed.Slug}")" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.News())" IconColor="Color.Accent">
-                            @if (UnreadFeedsState.Value.UnreadFeeds.ContainsKey(feed.Slug))
+                        <FluentNavLink Href="@($"/feed/{category.Value}/{feed.Value}")" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.News())" IconColor="Color.Accent">
+                            @if (UnreadFeedsState.Value.UnreadFeeds.ContainsKey(feed.Value))
                             {
-                                <FluentBadge Circular=true Appearance="Appearance.Accent" slot="start">@UnreadFeedsState.Value.UnreadFeeds[feed.Slug]</FluentBadge>
+                                <FluentBadge Circular=true Appearance="Appearance.Accent" slot="start">@UnreadFeedsState.Value.UnreadFeeds[feed.Value]</FluentBadge>
                             }
-                            @feed.Title
+                            @FeedsCollectionProvider.FeedsTitles[feed]
                         </FluentNavLink>
                     }
                 </FluentNavGroup>
@@ -39,5 +48,22 @@
     {
         base.OnInitialized();
         Dispatcher.Dispatch(new FetchAllUnreadAction());
+        Dispatcher.Dispatch(new FetchAllCategoriesAction());
+    }
+
+    public async Task OpenAddFeedDialog()
+    {
+
+        DialogParameters parameters = new()
+            {
+                PrimaryAction = "Enviar",
+                Width = "500px",
+                TrapFocus = true,
+                Modal = true,
+                PreventScroll = true,
+                PreventDismissOnOverlayClick = true,
+            };
+
+        var dialog = await DialogService.ShowDialogAsync<AddFeedDialog>(parameters);
     }
 }

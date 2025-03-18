@@ -29,7 +29,6 @@ else
             .GroupBy(x => new { x.FeedName, x.FeedSlug, x.FeedCategorySlug })
             .Select(x => new Feed(x.Key.FeedName, x.Key.FeedSlug, x.Key.FeedCategorySlug))
             .ToListAsync();
-
     }
 
     internal record Feed(string Name, string FeedSlug, string FeedCategory);

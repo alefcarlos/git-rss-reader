@@ -1,6 +1,6 @@
 ﻿@page "/feed/{categorySlug}/{target}"
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
-
+@attribute [StreamRendering]
 @using GitRssReader.Web.UnreadFeedUseCase
 @using SimpleFeedReader
 @inject FeedsCollectionProvider FeedsProvider
@@ -16,6 +16,7 @@
 
 <p>@feedInfo.Description</p>
 
+<FluentButton IconStart="@(new Icons.Regular.Size20.DocumentMultipleSync())" OnClick="@(() => MarkAsReadAsync())">Atualizar</FluentButton>
 <FluentButton Color="var(--warning)" IconStart="@(new Icons.Regular.Size20.MailReadMultiple())" OnClick="@(() => MarkAsReadAsync())">Marcar como lido</FluentButton>
 <FluentButton Appearance="@(onlyRead ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailRead())" OnClick="@(() => FilterOnlyRead())">Ver somente lidos</FluentButton>
 <FluentButton Appearance="@(onlyUnread ? Appearance.Stealth : Appearance.Outline)" IconStart="@(new Icons.Regular.Size20.MailUnread())" OnClick="@(() => FilterOnlyUnread())">Ver somente não lidos</FluentButton>
@@ -45,15 +46,14 @@ else
     public required string Target { get; set; }
 
     List<Article>? entries = null;
-    FeedEntry feedInfo = default!;
+    FeedInfo feedInfo = default!;
     private bool onlyUnread = true;
     private bool onlyRead = false;
 
     protected override async Task OnParametersSetAsync()
     {
         entries = null;
-        var cat = FeedsProvider.Data.FirstOrDefault(x => x.Slug == CategorySlug);
-        feedInfo = cat!.Feeds.First(x => x.Slug == Target);
+        feedInfo = FeedsProvider.Data[new CategorySlug(CategorySlug)][new FeedSlug(Target)];
 
         using var context = await DbFactory.CreateDbContextAsync();
         entries = await context.Articles

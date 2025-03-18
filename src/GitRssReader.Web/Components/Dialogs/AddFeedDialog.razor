@@ -1,0 +1,86 @@
+﻿@using GitRssReader.Web.GlobalState.FeedCategotyUseCase
+@using SimpleFeedReader
+@using System.ServiceModel.Syndication
+@using System.Xml
+@implements IDialogContentComponent
+@inject FeedsCollectionProvider FeedsCollectionProvider;
+@inject IDispatcher Dispatcher
+@inject IToastService ToastService
+
+<FluentDialogHeader>
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.BookAdd())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            Adicionar feed
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+<FluentDialogBody>
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentTextField TextFieldType="TextFieldType.Url"
+        Autofocus="true"
+        Name="add_feed_url"
+        @bind-Value="@feedUrl"
+        Label="Url"
+        Required />
+
+        <FluentSelect TOption="CategorySlug"
+        Label="Categoria"
+        Items="@FeedsCollectionProvider.Data.Keys"
+        Placeholder="Selecione uma categoria..."
+        OptionValue="@(p => p.Value)"
+        OptionText="@(p => FeedsCollectionProvider.CategoriesTitles[p])"
+        @bind-Value="@selectedCategory"
+        Required/>
+    </FluentStack>
+</FluentDialogBody>
+
+<FluentDialogFooter>
+    <FluentButton Loading="@isLoading" Appearance="Appearance.Accent" OnClick="@AddFeedAsync">
+        Adicionar
+    </FluentButton>
+</FluentDialogFooter>
+
+@code {
+    [CascadingParameter]
+    public FluentDialog? Dialog { get; set; } = default!;
+
+    private bool isLoading = false;
+    private string feedUrl = "";
+    private string? selectedCategory;
+
+    public async Task AddFeedAsync()
+    {
+        if (selectedCategory is null || string.IsNullOrWhiteSpace(feedUrl))
+        {
+            ToastService.ShowToast(ToastIntent.Error, "Categoria e url são obrigatórios.", timeout: 3_000);
+            return;
+        }
+
+        isLoading = true;
+        await Task.Yield();
+
+        SyndicationFeed syndicationFeed = SyndicationFeed.Load(XmlReader.Create(feedUrl));
+        var xmlUrl = syndicationFeed.Links.First(i => i.RelationshipType == "self");
+        var siteUrl = syndicationFeed.Links.First(i => i != xmlUrl);
+
+        var info = new NewFeedInfo(syndicationFeed.Title.Text, xmlUrl.Uri, siteUrl.Uri, syndicationFeed.Description.Text);
+
+        try
+        {
+            FeedsCollectionProvider.AddFeed(info, selectedCategory!);
+        }
+        catch (ArgumentException)
+        {
+            ToastService.ShowToast(ToastIntent.Error, "Esse feed já foi adicionado.", timeout: 3_000);
+            isLoading = false;
+            return;
+        }
+
+        isLoading = false;
+        ToastService.ShowToast(ToastIntent.Success, "Feed adicionado com sucesso.", timeout: 3_000);
+        Dispatcher.Dispatch(new FetchAllCategoriesAction());
+        await Dialog!.CloseAsync();
+    }
+}

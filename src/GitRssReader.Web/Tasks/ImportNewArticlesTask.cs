@@ -28,20 +28,20 @@ public class ImportNewArticlesTask : BackgroundService
             _logger.LogInformation("Iniciando scrapping de feeds..");
 
             await Task.WhenAll(feedsProvider.Data
-                .Select(x => ProcessCategory(x, stoppingToken))
+                .Select(x => ProcessCategory(x.Key.Value, x.Value, stoppingToken))
                 .ToArray());
 
             _logger.LogInformation("Scrapping de feeds finalizado");
 
-            await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
         }
     }
 
-    public async Task ProcessCategory(FeedCategory category, CancellationToken stoppingToken)
+    public async Task ProcessCategory(string categorySlug, FeedCollection feeds, CancellationToken stoppingToken)
     {
         using var context = _dbFactory.CreateDbContext();
 
-        foreach (var feed in category.Feeds)
+        foreach (var (key, feed) in feeds)
         {
             var control = await context.FeedsControl.FindAsync([feed.Slug], stoppingToken);
             if (control is null)
@@ -64,7 +64,7 @@ public class ImportNewArticlesTask : BackgroundService
 
                 var tasks = entries
                         .Where(x => x.PublishDate > control.LastImport)
-                        .Select(x => ProcessEntry(x, feed.Title, feed.Slug, category.Slug))
+                        .Select(x => ProcessEntry(x, feed.Title, feed.Slug, categorySlug))
                         .ToArray();
 
                 await Task.WhenAll(tasks);
